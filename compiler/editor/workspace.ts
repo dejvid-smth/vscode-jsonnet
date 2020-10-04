@@ -85,7 +85,7 @@ export abstract class LibPathResolver {
       if (path.isAbsolute(fileSpec.file)) {
         // If path is absolute and exists, it's resolved.
         importPath = this.pathExists(fileSpec.file)
-          ? `file://${fileSpec.file}`
+          ? url.pathToFileURL(fileSpec.file).href
           : null;
       } else {
         // Else the `import` path is either:
@@ -144,9 +144,7 @@ export abstract class LibPathResolver {
       try {
         const resolvedPath = path.join(libPath, importPath);
         if (this.pathExists(resolvedPath)) {
-          return path.isAbsolute(resolvedPath)
-            ? `file://${resolvedPath}`
-            : `file:///${resolvedPath}`;
+          return url.pathToFileURL(resolvedPath).href;
         }
       } catch (err) {
         // Ignore.

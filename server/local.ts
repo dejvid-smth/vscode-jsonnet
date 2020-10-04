@@ -28,7 +28,7 @@ export class VsDocumentManager implements editor.DocumentManager {
     }
 
     const fileUri = parsedFileUri.href;
-    const filePath = parsedFileUri.path;
+    const filePath = url.fileURLToPath(parsedFileUri.href);
     if (fileUri == null || filePath == null) {
       throw new Error(`INTERNAL ERROR: ill-formed, null href or path`);
     }
@@ -98,12 +98,9 @@ export class VsCompilerService implements _static.LexicalAnalyzerService {
     }
 
     // TODO: Replace this with a URL provider abstraction.
-    const parsedUrl = url.parse(fileUri);
-    if (!parsedUrl || !parsedUrl.path) {
-      throw new Error(`INTERNAL ERROR: Failed to parse URI '${fileUri}'`);
-    }
+    const filePath = url.fileURLToPath(fileUri);
 
-    const lex = lexer.Lex(parsedUrl.path, text);
+    const lex = lexer.Lex(filePath, text);
     if (lexical.isStaticError(lex)) {
       // TODO: emptyTokens is not right. Fill it in.
       const fail = new _static.LexFailure(lexer.emptyTokens, lex);

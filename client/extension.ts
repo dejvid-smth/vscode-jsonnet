@@ -150,18 +150,26 @@ namespace workspace {
     }
   }
 
+  const locateJsonnetUsingOSUtility = (utility: String): boolean => {
+    try {
+      // If this doesn't throw, 'jsonnet' was found on
+      // $PATH.
+      //
+      // TODO: Probably should find a good non-shell way of
+      // doing this.
+      execSync(`${utility} jsonnet`);
+    } catch (e) {
+      return false;
+    }
+
+    return true;
+  }
+
   const configureUnix = (config: vs.WorkspaceConfiguration): boolean => {
     if (config[execPathProp] != null) {
       jsonnet.executable = config[execPathProp];
     } else {
-      try {
-        // If this doesn't throw, 'jsonnet' was found on
-        // $PATH.
-        //
-        // TODO: Probably should find a good non-shell way of
-        // doing this.
-        execSync(`which jsonnet`);
-      } catch (e) {
+      if (!locateJsonnetUsingOSUtility('which')) {
         alert.jsonnetCommandNotOnPath();
         return false;
       }
@@ -171,12 +179,15 @@ namespace workspace {
   }
 
   const configureWindows = (config: vs.WorkspaceConfiguration): boolean => {
-    if (config[execPathProp] == null) {
-      alert.jsonnetCommandIsNull();
-      return false;
+    if (config[execPathProp] != null) {
+      jsonnet.executable = config[execPathProp];
+    } else {
+      if (!locateJsonnetUsingOSUtility('where')) {
+        alert.jsonnetCommandNotOnPath();
+        return false;
+      }
     }
 
-    jsonnet.executable = config[execPathProp];
     return true;
   }
 }
@@ -400,7 +411,7 @@ namespace jsonnet {
     constructor(private readonly diagnostics: vs.DiagnosticCollection) { }
 
     public report = (fileUri: vs.Uri, message: string): void => {
-      const messageLines = im.List<string>((<string>message).split(os.EOL)).rest();
+      const messageLines = im.List<string>((<string>message).split('\n')).rest();
 
       // Start over.
       this.diagnostics.clear();
@@ -563,14 +574,12 @@ namespace display {
 
 export namespace ksonnet {
   // find the root of the components structure.
-  export function isInApp(filePath: string, fsRoot = '/'): boolean {
-    const currentPath = path.join(fsRoot, filePath)
-    return checkForKsonnet(currentPath);
+  export function isInApp(filePath: string): boolean {
+    return checkForKsonnet(path.resolve(filePath));
   }
 
-  export function rootPath(filePath: string, fsRoot = '/'): string {
-    const currentPath = path.join(fsRoot, filePath)
-    return findRootPath(currentPath);
+  export function rootPath(filePath: string): string {
+    return findRootPath(path.resolve(filePath));
   }
 
   function checkForKsonnet(filePath: string): boolean {
@@ -579,6 +588,10 @@ export namespace ksonnet {
     }
 
     const dir = path.dirname(filePath);
+    if (dir === filePath) {
+      //we are already at root
+      return false;
+    }
     const parts = dir.split(path.sep)
     if (parts[parts.length - 1] === "components") {
       const root = path.dirname(dir);
