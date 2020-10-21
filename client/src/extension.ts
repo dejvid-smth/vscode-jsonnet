@@ -9,7 +9,7 @@ import * as yaml from "js-yaml";
 
 import * as im from 'immutable';
 
-import * as lexical from '../compiler/lexical-analysis/lexical';
+import * as lexical from './compiler/lexical-analysis/lexical';
 
 
 // activate registers the Jsonnet language server with vscode, and
@@ -27,7 +27,7 @@ namespace register {
   export const jsonnetClient = (context: vs.ExtensionContext): void => {
     // The server is implemented in node
     let languageClient = jsonnet.languageClient(
-      context.asAbsolutePath(path.join('out', 'server', 'server.js')));
+      context.asAbsolutePath(path.join('server', 'out', 'server.js')));
 
 
     // Push the disposable to the context's subscriptions so that the

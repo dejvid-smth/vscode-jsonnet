@@ -6,13 +6,13 @@ import * as url from 'url';
 
 import * as im from 'immutable';
 
-import * as ast from '../compiler/lexical-analysis/ast';
+import * as ast from './compiler/lexical-analysis/ast';
 import * as diagnostic from './diagnostic';
-import * as editor from '../compiler/editor';
-import * as lexer from '../compiler/lexical-analysis/lexer';
-import * as lexical from '../compiler/lexical-analysis/lexical';
+import * as editor from './compiler/editor';
+import * as lexer from './compiler/lexical-analysis/lexer';
+import * as lexical from './compiler/lexical-analysis/lexical';
 import * as local from './local';
-import * as _static from '../compiler/static';
+import * as _static from './compiler/static';
 
 // Create a connection for the server. The connection uses Node's IPC
 // as a transport

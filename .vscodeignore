@@ -7,3 +7,14 @@ src/**
 .gitignore
 tsconfig.json
 vsc-extension-quickstart.md
+out
+site
+images
+
+client/**
+!client/out
+!client/node_modules
+
+server/**
+!server/out
+!server/node_modules

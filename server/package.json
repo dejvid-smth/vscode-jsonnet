@@ -1,0 +1,22 @@
+{
+	"name": "jsonnet-server",
+	"description": "TODO",
+	"version": "1.0.0",
+	"author": "dejvid-smth",
+	"license": "MIT",
+	"engines": {
+		"node": "*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dejvid-smth/vscode-jsonnet"
+	},
+	"dependencies": {
+		"filepath": "^1.1.0",
+		"immutable": "^3.8.1",
+		"js-yaml": "^3.0.0",
+		"tmp": "0.0.33",
+		"vscode-languageserver": "^3.5.1"
+	},
+	"scripts": {}
+}

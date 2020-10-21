@@ -14,12 +14,19 @@
             "es6"
         ],
         "sourceMap": true,
-        "rootDir": "."
+        "rootDir": "src"
     },
+    "include": [
+		"src"
+	],
     "exclude": [
         "node_modules",
         "package.jsonnet",
         "package.libsonnet",
         ".vscode-test"
-    ]
+    ],
+    "references": [
+        { "path": "./client" },
+        { "path": "./server" }
+	]
 }

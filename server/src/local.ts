@@ -6,12 +6,12 @@ import * as url from 'url';
 import * as im from 'immutable';
 import * as server from 'vscode-languageserver';
 
-import * as ast from '../compiler/lexical-analysis/ast';
-import * as editor from '../compiler/editor';
-import * as lexer from '../compiler/lexical-analysis/lexer';
-import * as lexical from '../compiler/lexical-analysis/lexical';
-import * as parser from '../compiler/lexical-analysis/parser';
-import * as _static from "../compiler/static";
+import * as ast from './compiler/lexical-analysis/ast';
+import * as editor from './compiler/editor';
+import * as lexer from './compiler/lexical-analysis/lexer';
+import * as lexical from './compiler/lexical-analysis/lexical';
+import * as parser from './compiler/lexical-analysis/parser';
+import * as _static from "./compiler/static";
 
 export class VsDocumentManager implements editor.DocumentManager {
   constructor(

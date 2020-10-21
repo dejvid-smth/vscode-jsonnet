@@ -4,10 +4,10 @@ import * as server from 'vscode-languageserver';
 
 import * as im from 'immutable';
 
-import * as ast from '../compiler/lexical-analysis/ast';
-import * as editor from '../compiler/editor';
-import * as lexical from '../compiler/lexical-analysis/lexical';
-import * as _static from "../compiler/static";
+import * as ast from './compiler/lexical-analysis/ast';
+import * as editor from './compiler/editor';
+import * as lexical from './compiler/lexical-analysis/lexical';
+import * as _static from "./compiler/static";
 
 // fromFailure creates a diagnostic from a `LexFailure |
 // ParseFailure`.

@@ -1,0 +1,26 @@
+{
+	"name": "jsonnet-client",
+	"description": "TODO",
+	"author": "dejvid-smth",
+	"license": "MIT",
+	"version": "0.0.1",
+	"publisher": "dejvid-smth",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dejvid-smth/vscode-jsonnet"
+	},
+	"engines": {
+		"vscode": "^1.43.0"
+	},
+	"dependencies": {
+		"filepath": "^1.1.0",
+		"immutable": "^3.8.1",
+		"js-yaml": "^3.0.0",
+		"tmp": "0.0.33",
+		"vscode-languageclient": "^3.5.1"
+	},
+	"devDependencies": {
+		"@types/vscode": "1.43.0",
+		"vscode-test": "^1.3.0"
+	}
+}

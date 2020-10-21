@@ -29,7 +29,7 @@
             "args": ["--extensionDevelopmentPath=${workspaceRoot}" ],
             "stopOnEntry": false,
             "sourceMaps": true,
-            "outFiles": [ "${workspaceRoot}/out/client/**/*.js" ],
+            "outFiles": [ "${workspaceRoot}/client/out/**/*.js" ],
             "preLaunchTask": "npm"
         },
         {
@@ -38,7 +38,7 @@
             "request": "attach",
             "port": 6009,
             "sourceMaps": true,
-            "outFiles": [ "${workspaceRoot}/out/**/*.js" ],
+            "outFiles": [ "${workspaceRoot}/server/out/**/*.js" ],
             "preLaunchTask": "npm"
         },
         {
